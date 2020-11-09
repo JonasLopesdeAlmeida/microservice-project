@@ -1,33 +1,33 @@
 package com.jmmd.payroll.servicies;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
 
 import com.jmmd.payroll.entities.Payment;
 import com.jmmd.payroll.entities.Worker;
+import com.jmmd.payroll.feignclients.WorkerFeignClients;
 
 @Service 
 public class PaymentService {
 	
 	//get value of application.properties that contain workers rest api.
-	@Value("${hr-workers.host}")
-	private String workersHost;
+    //	@Value("${hr-workers.host}")
+    //	private String workersHost;
 	
+	//restTemplate was replaced for Feign clients
+    //	@Autowired
+    //	private RestTemplate restTemplate;
 	@Autowired
-	private RestTemplate restTemplate;
-
+	private WorkerFeignClients wfc;
+	
 	//testing payment mock
 	public Payment getPayment( long workerId, int days) {
 		//creating a map of params 
-		Map<String , String> uriVariables = new HashMap<>();
-		uriVariables.put("id",""+ workerId );
+       //Map<String , String> uriVariables = new HashMap<>();
+       //uriVariables.put("id",""+ workerId );
 		
-		Worker workers = restTemplate.getForObject(workersHost +"/workers/{id}", Worker.class,uriVariables  );
+		//getboby was used to get response body which is a type of worker.
+		Worker workers = wfc.findById(workerId).getBody();
 		
 		return new Payment(workers.getName(), workers.getDailyIncome(), days);
 		
