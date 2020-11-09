@@ -6,7 +6,7 @@ import org.springframework.cloud.netflix.ribbon.RibbonClient;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 @RibbonClient(name = "hr-worker")
 @EnableFeignClients //basic anotation feign responsable to inject feign into the project.
-@SpringBootApplication
+@SpringBootApplication 
 public class HrPayrollApplication {
 
 	public static void main(String[] args) {
