@@ -12,6 +12,9 @@ import com.jmmd.payroll.entities.Worker;
 
 
 @Component //component managed by spring
+
+//the name of microservice will be called by eureka server. it is not longer more called by port number.
+//it is just to remind tha payroll it is an eureka client already.
 @FeignClient(name = "hr-worker", path = "/workers")
 public interface WorkerFeignClients {
 	
