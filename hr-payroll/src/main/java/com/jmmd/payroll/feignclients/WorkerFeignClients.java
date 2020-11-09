@@ -12,7 +12,7 @@ import com.jmmd.payroll.entities.Worker;
 
 
 @Component //component managed by spring
-@FeignClient(name = "hr-worker", url= "localhost:8001", path = "/workers")
+@FeignClient(name = "hr-worker", path = "/workers")
 public interface WorkerFeignClients {
 	
 	//declaring webservice type tha come from to workers microservice
